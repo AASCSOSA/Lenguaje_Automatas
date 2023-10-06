@@ -89,44 +89,54 @@ public class Actividad3 extends javax.swing.JFrame {
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         palabras();
+        txtPalabra.setText("");
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     private void palabras() {
         String palabra = null;
         palabra = txtPalabra.getText();
-        String delimitadores = "[\\ \\.\\,\\-\\?]";
+       // palabra.toUpperCase();
+        String delimitadores = "[\\ \\.\\,\\-\\?\\  ]";
         String[] separarPalabra = palabra.split(delimitadores);
         for (String separador : separarPalabra) {
             txAreaMostrar.append(separador + "\n");
-            if (separador.contains("v") || separador.contains("V")) {
-                try {
-                    Pattern pat = Pattern.compile("([A-Za-z][abd-mpqs-z]+|v[abd-mp-z]+|[A-Za-z][a-z]+v[ir]+)");
-                    Matcher mat = pat.matcher(separador);
+            if (separador.contains("b") || separador.contains("B")) {
+                if (separador.endsWith("bir") || separador.endsWith("ever") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")||separador.endsWith("dú") ) {
+                    txAreaMostrar.append(separador + " Cadena no válida\n");
+                } else {
+                    try {
+                        Pattern pat = Pattern.compile("([A-Za-z][a-záéíóú]+(b[iorsz]+)*|[A-Za-z][iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorszeuabáéíóú]+|[A-Za-z][a-záéíóú]+b[iorszeuabáéíóúmns]+)");
+                        Matcher mat = pat.matcher(separador);
 
-                    if (mat.matches()) {
-                        txAreaMostrar.append(separador + " Cadena válida\n");
-                    } else {
-                        txAreaMostrar.append(separador + " Cadena no válida\n");
+                        if (mat.matches()) {
+                            txAreaMostrar.append(separador + " Cadena válida\n");
+                        } else {
+                            txAreaMostrar.append(separador + " Cadena no válida\n");
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error en la expresión regular: " + e.getMessage());
                     }
-                } catch (Exception e) {
-                    System.err.println("Error en la expresión regular: " + e.getMessage());
+                }
+            } else if (separador.contains("v") || separador.contains("V")) {
+                if (separador.startsWith("vur") || separador.startsWith("vus")|| separador.startsWith("vio")|| separador.startsWith("vis")|| separador.startsWith("viz")||separador.startsWith("vene")||separador.startsWith("vien")||separador.startsWith("av")||separador.startsWith("ov")) {
+                    txAreaMostrar.append(separador + " Cadena no válida\n");
+                } else if (separador.endsWith("aver") || separador.endsWith("vuir") || separador.endsWith("ver") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")|| separador.endsWith("vio")|| separador.endsWith("vilidad")|| separador.endsWith("vundu")|| separador.endsWith("vunda")) {
+                    txAreaMostrar.append(separador + " Cadena no válida\n");
+                } else {
+                    try {
+                        Pattern pat = Pattern.compile("([A-Za-z][a-záéíóú]+|v[abd-mp-záéíóú]+|[A-Za-z][a-záéíóú]+|[A-Za-z][a-z]+)");
+                        Matcher mat = pat.matcher(separador);
+
+                        if (mat.matches()) {
+                            txAreaMostrar.append(separador + " Cadena válida\n");
+                        } else {
+                            txAreaMostrar.append(separador + " Cadena no válida\n");
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error en la expresión regular: " + e.getMessage());
+                    }
                 }
             }
-            else if (separador.contains("b") || separador.contains("B")) {
-                 try {
-                    Pattern pat = Pattern.compile("([A-Za-z][iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorszeuabáéíóú]+|[A-Za-z][a-záéíóú]+b[iorszeuabáéíóúmn]+)");
-                    Matcher mat = pat.matcher(separador);
-
-                    if (mat.matches()) {
-                        txAreaMostrar.append(separador + " Cadena válida\n");
-                    } else {
-                        txAreaMostrar.append(separador + " Cadena no válida\n");
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error en la expresión regular: " + e.getMessage());
-                }
-                 
-             }
 
         }
     }
