@@ -23,17 +23,12 @@ public class actividad1 {
         int s = 0;
         do {
             String nombre = JOptionPane.showInputDialog("Ingrese un Nombre");
-            String edad = JOptionPane.showInputDialog("Ingrese un Nombre");
-            String correo = JOptionPane.showInputDialog("Ingrese un Nombre");
-            try {
-                Pattern pat = Pattern.compile("^[A-Z][a-z]+(\\s[A-Z][a-z]+)*(\\s[A-Z][a-z]+)?");
-                Pattern pat1 = Pattern.compile("^[\\w.-]+(\\.[\\w.-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-                Pattern pat2 = Pattern.compile("^(1[8-9]|2[0-5])");
 
+            try {
+                Pattern pat = Pattern.compile("[a-zA-Z]+\\s[a-zA-Z]+$");
                 Matcher mat = pat.matcher(nombre);
-                Matcher mat1 = pat1.matcher(correo);
-                Matcher mat2 = pat2.matcher(edad);
-                if (mat1.matches()) {
+
+                if (mat.matches()) {
                     System.out.println("Cadena válida");
                 } else {
                     System.out.println("Cadena no válida");

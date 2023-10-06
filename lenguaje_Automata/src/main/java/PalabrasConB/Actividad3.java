@@ -2,30 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Actividad2;
+package PalabrasConB;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author alanh
  */
-public class act2 extends javax.swing.JFrame {
+public class Actividad3 extends javax.swing.JFrame {
 
     /**
-     * Creates new form act2
+     * Creates new form Actividad3
      */
-    DefaultTableModel tblmodel = new DefaultTableModel();
-    ArrayList<String> palabraR= new ArrayList<>();
-
-    public act2() {
+    public Actividad3() {
         initComponents();
-        tblmodel.addColumn("L{R}");
     }
 
     /**
@@ -38,14 +31,18 @@ public class act2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txAreaMostrar = new javax.swing.JTextArea();
         txtPalabra = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Ingresa una palabra");
+        jLabel1.setText("Ingresar palabra");
+
+        txAreaMostrar.setColumns(20);
+        txAreaMostrar.setRows(5);
+        jScrollPane1.setViewportView(txAreaMostrar);
 
         btnVerificar.setText("Verificar");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,16 +50,6 @@ public class act2 extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-
-        tblDatos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tblDatos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,60 +59,76 @@ public class act2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPalabra, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                        .addGap(22, 22, 22))
+                        .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64)
+                        .addGap(86, 86, 86)
                         .addComponent(btnVerificar)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-        comp();
-        mandar();
+        palabras();
     }//GEN-LAST:event_btnVerificarActionPerformed
 
-    private void comp() {
-        String palabra;
+    private void palabras() {
+        String palabra = null;
         palabra = txtPalabra.getText();
-        try {
-            Pattern pat = Pattern.compile("A[a-z]{3,6}");
-            Matcher mat = pat.matcher(palabra);
+        String delimitadores = "[\\ \\.\\,\\-\\?]";
+        String[] separarPalabra = palabra.split(delimitadores);
+        for (String separador : separarPalabra) {
+            txAreaMostrar.append(separador + "\n");
+            if (separador.contains("v") || separador.contains("V")) {
+                try {
+                    Pattern pat = Pattern.compile("([A-Za-z][abd-mpqs-z]+|v[abd-mp-z]+|[A-Za-z][a-z]+v[ir]+)");
+                    Matcher mat = pat.matcher(separador);
 
-            if (mat.matches()) {
-                Object[] dat = {palabra};
-                tblmodel.addRow(dat);
-                tblDatos.setModel(tblmodel);
-            } else {
-                JOptionPane.showMessageDialog(null, "Incorrecto");
+                    if (mat.matches()) {
+                        txAreaMostrar.append(separador + " Cadena válida\n");
+                    } else {
+                        txAreaMostrar.append(separador + " Cadena no válida\n");
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error en la expresión regular: " + e.getMessage());
+                }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error en la expresión regular: " + e.getMessage());
-        }
-    }
+            else if (separador.contains("b") || separador.contains("B")) {
+                 try {
+                    Pattern pat = Pattern.compile("([A-Za-z][iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorszeuabáéíóú]+|[A-Za-z][a-záéíóú]+b[iorszeuabáéíóúmn]+)");
+                    Matcher mat = pat.matcher(separador);
 
-    private void mandar() {
-        txtPalabra.setText("");
+                    if (mat.matches()) {
+                        txAreaMostrar.append(separador + " Cadena válida\n");
+                    } else {
+                        txAreaMostrar.append(separador + " Cadena no válida\n");
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error en la expresión regular: " + e.getMessage());
+                }
+                 
+             }
+
+        }
     }
 
     /**
@@ -145,20 +148,20 @@ public class act2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(act2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actividad3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(act2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actividad3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(act2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actividad3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(act2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Actividad3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new act2().setVisible(true);
+                new Actividad3().setVisible(true);
             }
         });
     }
@@ -166,8 +169,8 @@ public class act2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblDatos;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txAreaMostrar;
     private javax.swing.JTextField txtPalabra;
     // End of variables declaration//GEN-END:variables
 }
