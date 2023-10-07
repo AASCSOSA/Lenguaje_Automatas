@@ -35,11 +35,15 @@ public class Actividad3 extends javax.swing.JFrame {
         txAreaMostrar = new javax.swing.JTextArea();
         txtPalabra = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txAContador = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Ingresar palabra");
 
+        txAreaMostrar.setEditable(false);
         txAreaMostrar.setColumns(20);
         txAreaMostrar.setRows(5);
         jScrollPane1.setViewportView(txAreaMostrar);
@@ -51,6 +55,13 @@ public class Actividad3 extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Contador");
+
+        txAContador.setEditable(false);
+        txAContador.setColumns(20);
+        txAContador.setRows(5);
+        jScrollPane2.setViewportView(txAContador);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,30 +69,41 @@ public class Actividad3 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
+                        .addGap(418, 418, 418))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(392, 392, 392))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(86, 86, 86)
-                        .addComponent(btnVerificar)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(btnVerificar)
+                .addGap(75, 75, 75))
         );
 
         pack();
@@ -93,6 +115,9 @@ public class Actividad3 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     private void palabras() {
+        int contadorpB=0;
+        int contadorPP=0;
+        int contadorA=0;
         String palabra = null;
         palabra = txtPalabra.getText();
        // palabra.toUpperCase();
@@ -100,8 +125,14 @@ public class Actividad3 extends javax.swing.JFrame {
         String[] separarPalabra = palabra.split(delimitadores);
         for (String separador : separarPalabra) {
             txAreaMostrar.append(separador + "\n");
+            if(separador.equalsIgnoreCase("lo")||separador.equalsIgnoreCase("la")||separador.equalsIgnoreCase("las")||separador.equalsIgnoreCase("los")){
+                contadorA++;
+            }
+            if(separador.equalsIgnoreCase("el")||separador.equalsIgnoreCase("yo")||separador.equalsIgnoreCase("ella")||separador.equalsIgnoreCase("nosotros")||separador.equalsIgnoreCase("nosotras")||separador.equalsIgnoreCase("ellos")||separador.equalsIgnoreCase("ellas")){
+                contadorPP++;
+            }
             if (separador.contains("b") || separador.contains("B")) {
-                if (separador.endsWith("bir") || separador.endsWith("ever") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")||separador.endsWith("dú") ) {
+                if ( separador.endsWith("ever") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")||separador.endsWith("dú") ) {
                     txAreaMostrar.append(separador + " Cadena no válida\n");
                 } else {
                     try {
@@ -110,6 +141,7 @@ public class Actividad3 extends javax.swing.JFrame {
 
                         if (mat.matches()) {
                             txAreaMostrar.append(separador + " Cadena válida\n");
+                            contadorpB++;
                         } else {
                             txAreaMostrar.append(separador + " Cadena no válida\n");
                         }
@@ -118,7 +150,7 @@ public class Actividad3 extends javax.swing.JFrame {
                     }
                 }
             } else if (separador.contains("v") || separador.contains("V")) {
-                if (separador.startsWith("vur") || separador.startsWith("vus")|| separador.startsWith("vio")|| separador.startsWith("vis")|| separador.startsWith("viz")||separador.startsWith("vene")||separador.startsWith("vien")||separador.startsWith("av")||separador.startsWith("ov")) {
+                if (separador.startsWith("iva")||separador.startsWith("vur") || separador.startsWith("vus")|| separador.startsWith("vio")|| separador.startsWith("vis")|| separador.startsWith("viz")||separador.startsWith("vene")||separador.startsWith("vien")||separador.startsWith("av")||separador.startsWith("ov")) {
                     txAreaMostrar.append(separador + " Cadena no válida\n");
                 } else if (separador.endsWith("aver") || separador.endsWith("vuir") || separador.endsWith("ver") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")|| separador.endsWith("vio")|| separador.endsWith("vilidad")|| separador.endsWith("vundu")|| separador.endsWith("vunda")) {
                     txAreaMostrar.append(separador + " Cadena no válida\n");
@@ -139,6 +171,10 @@ public class Actividad3 extends javax.swing.JFrame {
             }
 
         }
+        txAContador.setText("");
+        txAContador.append("Total de palabras con B: "+contadorpB+ "\n");
+        txAContador.append("Total de Artículos: "+contadorA+ "\n");
+        txAContador.append("Total de pronombres personales: "+contadorPP+ "\n");
     }
 
     /**
@@ -179,7 +215,10 @@ public class Actividad3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea txAContador;
     private javax.swing.JTextArea txAreaMostrar;
     private javax.swing.JTextField txtPalabra;
     // End of variables declaration//GEN-END:variables
