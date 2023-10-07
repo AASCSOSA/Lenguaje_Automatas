@@ -17,6 +17,11 @@ public class Actividad3 extends javax.swing.JFrame {
     /**
      * Creates new form Actividad3
      */
+    String[] palabrasSeparadas = new String[0];
+    int contadorPB = 0;
+    int contadorArticulos = 0;
+    int contadorPPersonales = 0;
+
     public Actividad3() {
         initComponents();
     }
@@ -110,71 +115,128 @@ public class Actividad3 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-        palabras();
+        contadorPalabras();
+        letraB();
+        mostrarContadores();
         txtPalabra.setText("");
     }//GEN-LAST:event_btnVerificarActionPerformed
+    private String[] separaraPalabras() {
+        String palabra = txtPalabra.getText();
+        String delimitadores = "[\\s.,\\-?]+"; // Define los delimitadores como espacios, comas, puntos y guiones
+        palabrasSeparadas = palabra.split(delimitadores);
+        return palabrasSeparadas;
+    }
 
-    private void palabras() {
-        int contadorpB=0;
-        int contadorPP=0;
-        int contadorA=0;
-        String palabra = null;
-        palabra = txtPalabra.getText();
-       // palabra.toUpperCase();
-        String delimitadores = "[\\ \\.\\,\\-\\?\\  ]";
-        String[] separarPalabra = palabra.split(delimitadores);
-        for (String separador : separarPalabra) {
-            txAreaMostrar.append(separador + "\n");
-            if(separador.equalsIgnoreCase("lo")||separador.equalsIgnoreCase("la")||separador.equalsIgnoreCase("las")||separador.equalsIgnoreCase("los")){
-                contadorA++;
+    private void contadorPalabras() {
+        String[] palabrasContar = separaraPalabras();
+        for (String palabrasC : palabrasContar) {
+            if (palabrasC.equalsIgnoreCase("lo") || palabrasC.equalsIgnoreCase("la") || palabrasC.equalsIgnoreCase("las") || palabrasC.equalsIgnoreCase("los")) {
+                contadorArticulos++;
             }
-            if(separador.equalsIgnoreCase("el")||separador.equalsIgnoreCase("yo")||separador.equalsIgnoreCase("ella")||separador.equalsIgnoreCase("nosotros")||separador.equalsIgnoreCase("nosotras")||separador.equalsIgnoreCase("ellos")||separador.equalsIgnoreCase("ellas")){
-                contadorPP++;
+            if (palabrasC.equalsIgnoreCase("el") || palabrasC.equalsIgnoreCase("yo") || palabrasC.equalsIgnoreCase("ella") || palabrasC.equalsIgnoreCase("nosotros") || palabrasC.equalsIgnoreCase("nosotras") || palabrasC.equalsIgnoreCase("ellos") || palabrasC.equalsIgnoreCase("ellas")) {
+                contadorPPersonales++;
             }
-            if (separador.contains("b") || separador.contains("B")) {
-                if ( separador.endsWith("ever") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")||separador.endsWith("dú") ) {
-                    txAreaMostrar.append(separador + " Cadena no válida\n");
-                } else {
+        }
+    }
+
+    private void letraB() {
+        String[] validacionB = palabrasSeparadas;
+        for (String validacion : validacionB) {
+            if (reglaLetraB(validacion)) {
+                txAreaMostrar.append(validacion + " ----> Cadena válida\n");
+            } 
+            if(palabrasNoB(validacion)){
+                txAreaMostrar.append(validacion+"\n");
+            }
+        }
+    }
+
+    private boolean reglaLetraB(String palabra) {
+        String[] validacionB = palabrasSeparadas;
+        String[] palabrasConTerminacion = {"buir", "aba", "abas", "ábamos", "abais", "aban", "bio", "ble", "bilidad", "bundo", "bunda"};
+        String[] palabrasConIniciacion = {"biblio", "bu", "bur", "bus", "bi", "bis", "biz", "bio", "bien", "bene", "ab", "ob", "br", "rob", "sub"};
+        String[] palabrasValidacion = {"herbir", "serbir", "bibir", "vibir", "bida", "budú", "avs", "viblio", "bivlio", "vonito", "escrivir", "recivir", "sucumvir"};
+        String[] palabraInicioV = {"vivlio", "vu", "vur", "vus", "vi", "vis", "viz", "vio", "vien", "vene", "av", "ov", "vr", "rov", "suv"};
+        if (palabra.endsWith("herbir") || palabra.startsWith("serbir") || palabra.startsWith("bibir")
+                || palabra.startsWith("vibir") || palabra.startsWith("bida") || palabra.startsWith("budú") || palabra.startsWith("viblio")
+                || palabra.startsWith("bivlio") || palabra.startsWith("vonito") || palabra.startsWith("escrivir") || palabra.startsWith("recivir")
+                || palabra.startsWith("sucumvir")) {
+            return false;
+        } else if (palabra.contains("b") || palabra.contains("B")) {
+            for (String palabraI : palabrasConIniciacion) {
+                if (palabra.startsWith(palabraI)) {
                     try {
-                        Pattern pat = Pattern.compile("([A-Za-z][a-záéíóú]+(b[iorsz]+)*|[A-Za-z][iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorsz]+[a-z]+|[A-Za-z][a-z]+b[iorszeuabáéíóú]+|[A-Za-z][a-záéíóú]+b[iorszeuabáéíóúmns]+)");
-                        Matcher mat = pat.matcher(separador);
+                        Pattern pat = Pattern.compile("([A-Za-z-áéíóúÁÉÍÓÚ][a-záéíóú]+)");
+                        Matcher mat = pat.matcher(palabra);
 
                         if (mat.matches()) {
-                            txAreaMostrar.append(separador + " Cadena válida\n");
-                            contadorpB++;
+                            contadorPB++;
+
+                            return true;
+
                         } else {
-                            txAreaMostrar.append(separador + " Cadena no válida\n");
+
+                            return false;
                         }
                     } catch (Exception e) {
                         System.err.println("Error en la expresión regular: " + e.getMessage());
                     }
                 }
-            } else if (separador.contains("v") || separador.contains("V")) {
-                if (separador.startsWith("iva")||separador.startsWith("vur") || separador.startsWith("vus")|| separador.startsWith("vio")|| separador.startsWith("vis")|| separador.startsWith("viz")||separador.startsWith("vene")||separador.startsWith("vien")||separador.startsWith("av")||separador.startsWith("ov")) {
-                    txAreaMostrar.append(separador + " Cadena no válida\n");
-                } else if (separador.endsWith("aver") || separador.endsWith("vuir") || separador.endsWith("ver") || separador.endsWith("ava") || separador.endsWith("avas") || separador.endsWith("ávamos") || separador.endsWith("avais") || separador.endsWith("avan")|| separador.endsWith("vio")|| separador.endsWith("vilidad")|| separador.endsWith("vundu")|| separador.endsWith("vunda")) {
-                    txAreaMostrar.append(separador + " Cadena no válida\n");
+            }
+            for (String palabraT : palabrasConTerminacion) {
+                try {
+                    Pattern pat = Pattern.compile("([A-Za-z-áéíóúÁÉÍÓÚ][a-záéíóú]+)");
+                    Matcher mat = pat.matcher(palabra);
+
+                    if (mat.matches()) {
+                        contadorPB++;
+
+                        return true;
+                    } else {
+
+                        return false;
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error en la expresión regular: " + e.getMessage());
+                }
+            }
+        } else if (palabra.contains("v") || palabra.contains("V")) {
+            for (String palabraV : palabraInicioV) {
+                if (palabra.endsWith(palabraV)) {
+                    return false;
                 } else {
                     try {
                         Pattern pat = Pattern.compile("([A-Za-z][a-záéíóú]+|v[abd-mp-záéíóú]+|[A-Za-z][a-záéíóú]+|[A-Za-z][a-z]+)");
-                        Matcher mat = pat.matcher(separador);
+                        Matcher mat = pat.matcher(palabra);
 
                         if (mat.matches()) {
-                            txAreaMostrar.append(separador + " Cadena válida\n");
+
+                            return true;
                         } else {
-                            txAreaMostrar.append(separador + " Cadena no válida\n");
+
+                            return false;
                         }
                     } catch (Exception e) {
                         System.err.println("Error en la expresión regular: " + e.getMessage());
                     }
                 }
             }
-
+            return false;
         }
-        txAContador.setText("");
-        txAContador.append("Total de palabras con B: "+contadorpB+ "\n");
-        txAContador.append("Total de Artículos: "+contadorA+ "\n");
-        txAContador.append("Total de pronombres personales: "+contadorPP+ "\n");
+        return false;
+    }
+    private boolean palabrasNoB(String palabra){
+        if(!(palabra.contains("v")||palabra.contains("V")||palabra.contains("b")||palabra.contains("B"))){
+            return true;
+        }
+        return false;
+    }
+
+    private void mostrarContadores() {
+        txtPalabra.setText("");
+        txAContador.append("Total de artículos: " + contadorArticulos + "\n");
+        txAContador.append("Total de palabras con B:" + contadorPB+"\n");
+        txAContador.append("Total de pronombres personales: " + contadorPPersonales + "\n");
     }
 
     /**
