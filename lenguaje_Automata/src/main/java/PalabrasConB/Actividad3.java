@@ -19,8 +19,11 @@ public class Actividad3 extends javax.swing.JFrame {
      */
     String[] palabrasSeparadas = new String[0];
     int contadorPB = 0;
+    int totalPalabrasV = 0;
     int contadorArticulos = 0;
     int contadorPPersonales = 0;
+    int totalPalabrasB = 0;
+    int contadorPMalEscritas = 0;
 
     public Actividad3() {
         initComponents();
@@ -36,23 +39,30 @@ public class Actividad3 extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txAreaMostrar = new javax.swing.JTextArea();
         txtPalabra = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txAreaMostrar = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
+        txAPalabraBV = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txAPalabraNV = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
         txAContador = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lbTotal = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Ingresar palabra");
 
-        txAreaMostrar.setEditable(false);
-        txAreaMostrar.setColumns(20);
-        txAreaMostrar.setRows(5);
-        jScrollPane1.setViewportView(txAreaMostrar);
-
+        btnVerificar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnVerificar.setText("Verificar");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,12 +70,69 @@ public class Actividad3 extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Contador");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Oración/Palabra que se ingresó");
 
-        txAContador.setEditable(false);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Palabras con B/V");
+
+        txAreaMostrar.setColumns(20);
+        txAreaMostrar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txAreaMostrar.setRows(5);
+        jScrollPane1.setViewportView(txAreaMostrar);
+
+        txAPalabraBV.setColumns(20);
+        txAPalabraBV.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txAPalabraBV.setRows(5);
+        jScrollPane2.setViewportView(txAPalabraBV);
+
+        txAPalabraNV.setColumns(20);
+        txAPalabraNV.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txAPalabraNV.setRows(5);
+        jScrollPane3.setViewportView(txAPalabraNV);
+
         txAContador.setColumns(20);
+        txAContador.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txAContador.setRows(5);
-        jScrollPane2.setViewportView(txAContador);
+        jScrollPane4.setViewportView(txAContador);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
+        );
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Palabras no válidas");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Contador");
+
+        lbTotal.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        lbTotal.setText("---");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("ALAIN ANTONIO SOSA CRUZ -21TE0297");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,169 +141,336 @@ public class Actividad3 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(418, 418, 418))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel2)
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel3)
+                        .addGap(207, 207, 207)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel5)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(392, 392, 392))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lbTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(btnVerificar)
-                .addGap(75, 75, 75))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerificar))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(lbTotal))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-        contadorPalabras();
+        separaraPalabras();
+        contarPalabras();
+        mostrarTexto(palabrasSeparadas);
         letraB();
         mostrarContadores();
         txtPalabra.setText("");
     }//GEN-LAST:event_btnVerificarActionPerformed
+
+    /*Separa las palabras que se ingresan por el teclado*/
     private String[] separaraPalabras() {
-        String palabra = txtPalabra.getText();
-        String delimitadores = "[\\s.,\\-?]+"; // Define los delimitadores como espacios, comas, puntos y guiones
-        palabrasSeparadas = palabra.split(delimitadores);
-        return palabrasSeparadas;
+        if (txtPalabra.getText().isEmpty()) {
+            return palabrasSeparadas;
+        } else {
+            String palabra = txtPalabra.getText();
+            String delimitadores = "[\\s.,\\-?]+"; // Define los delimitadores como espacios, comas, puntos y guiones
+            palabrasSeparadas = palabra.split(delimitadores);
+            return palabrasSeparadas;
+        }
     }
 
-    private void contadorPalabras() {
-        String[] palabrasContar = separaraPalabras();
-        for (String palabrasC : palabrasContar) {
-            if (palabrasC.equalsIgnoreCase("lo") || palabrasC.equalsIgnoreCase("la") || palabrasC.equalsIgnoreCase("las") || palabrasC.equalsIgnoreCase("los")) {
+    private void contarPalabras() {
+        contadorArticulos = 0;
+        contadorPPersonales = 0;
+
+        for (String palabra : palabrasSeparadas) {
+            if (esArticulo(palabra.toLowerCase())) {
                 contadorArticulos++;
             }
-            if (palabrasC.equalsIgnoreCase("el") || palabrasC.equalsIgnoreCase("yo") || palabrasC.equalsIgnoreCase("ella") || palabrasC.equalsIgnoreCase("nosotros") || palabrasC.equalsIgnoreCase("nosotras") || palabrasC.equalsIgnoreCase("ellos") || palabrasC.equalsIgnoreCase("ellas")) {
+            if (esPronombrePersonal(palabra)) {
                 contadorPPersonales++;
             }
         }
     }
 
-    private void letraB() {
-        String[] validacionB = palabrasSeparadas;
-        for (String validacion : validacionB) {
-            if (reglaLetraB(validacion)) {
-                txAreaMostrar.append(validacion + " ----> Cadena válida\n");
-            } 
-            if(palabrasNoB(validacion)){
-                txAreaMostrar.append(validacion+"\n");
-            }
+    private boolean esArticulo(String palabra) {
+        return palabra.equalsIgnoreCase("el") || palabra.equalsIgnoreCase("la") || palabra.equalsIgnoreCase("los") || palabra.equalsIgnoreCase("las")
+                || palabra.equalsIgnoreCase("un") || palabra.equalsIgnoreCase("una") || palabra.equalsIgnoreCase("unos") || palabra.equalsIgnoreCase("unas")
+                || palabra.equalsIgnoreCase("lo") || palabra.equalsIgnoreCase("al") || palabra.equalsIgnoreCase("del");
+    }
+
+    private boolean esPronombrePersonal(String palabra) {
+        return palabra.equalsIgnoreCase("yo") || palabra.equalsIgnoreCase("tú") || palabra.equalsIgnoreCase("él")
+                || palabra.equalsIgnoreCase("ella") || palabra.equalsIgnoreCase("usted") || palabra.equalsIgnoreCase("nosotros")
+                || palabra.equalsIgnoreCase("nosotras") || palabra.equalsIgnoreCase("vosotros") || palabra.equalsIgnoreCase("vosotras")
+                || palabra.equalsIgnoreCase("ellos") || palabra.equalsIgnoreCase("ellas") || palabra.equalsIgnoreCase("ustedes");
+    }
+
+    private void mostrarTexto(String[] palabra) {
+        txAreaMostrar.setText("");
+        for (String palabraXpalabra : palabra) {
+            txAreaMostrar.append(palabraXpalabra + "\n");
         }
     }
 
-    private boolean reglaLetraB(String palabra) {
-        String[] validacionB = palabrasSeparadas;
-        String[] palabrasConTerminacion = {"buir", "aba", "abas", "ábamos", "abais", "aban", "bio", "ble", "bilidad", "bundo", "bunda"};
-        String[] palabrasConIniciacion = {"biblio", "bu", "bur", "bus", "bi", "bis", "biz", "bio", "bien", "bene", "ab", "ob", "br", "rob", "sub"};
-        String[] palabrasValidacion = {"herbir", "serbir", "bibir", "vibir", "bida", "budú", "avs", "viblio", "bivlio", "vonito", "escrivir", "recivir", "sucumvir"};
-        String[] palabraInicioV = {"vivlio", "vu", "vur", "vus", "vi", "vis", "viz", "vio", "vien", "vene", "av", "ov", "vr", "rov", "suv"};
-        if (palabra.endsWith("herbir") || palabra.startsWith("serbir") || palabra.startsWith("bibir")
-                || palabra.startsWith("vibir") || palabra.startsWith("bida") || palabra.startsWith("budú") || palabra.startsWith("viblio")
-                || palabra.startsWith("bivlio") || palabra.startsWith("vonito") || palabra.startsWith("escrivir") || palabra.startsWith("recivir")
-                || palabra.startsWith("sucumvir")) {
-            return false;
-        } else if (palabra.contains("b") || palabra.contains("B")) {
-            for (String palabraI : palabrasConIniciacion) {
-                if (palabra.startsWith(palabraI)) {
-                    try {
-                        Pattern pat = Pattern.compile("([A-Za-z-áéíóúÁÉÍÓÚ][a-záéíóú]+)");
-                        Matcher mat = pat.matcher(palabra);
+    private void letraB() {
+        contadorPB = 0;
+        totalPalabrasB = 0;
+        contadorPMalEscritas = 0;
+        totalPalabrasV = 0;
+        txAPalabraBV.setText("");
+        txAPalabraNV.setText("");
+        String[] validacionB = separaraPalabras();
+        for (String validacion : validacionB) {
+            switch (reglaLB(validacion.toLowerCase())) {
+                case 0:
+                    txAPalabraBV.append(validacion + " ----> Cadena válida\n");
+                    break;
+                case 1:
+                    txAPalabraNV.append(validacion + " ----> Cadena no válida en la regla b\n");
+                    break;
+                case 2:
+                    txAPalabraNV.append(validacion + " ----> Cadena no válida en la regla v\n");
+                    break;
+                case 3:
+                    break;
+                default:
+                    txtPalabra.setText("");
+                    break;
+            }
 
-                        if (mat.matches()) {
-                            contadorPB++;
+        }
+    }
 
-                            return true;
+    private int reglaLB(String palabra) {
+        String[] reglasB = {"([a-záéíóú]+(bir))", "([a-záéíóú]+(buir))", "([a-záéíóú]+(ber))", "([a-záéíóú]+(ab)([a-záéíóú]+))", "(ib)[a-záéíóú]+", "(biblio)[a-záéíóú]+", "(bi|biz|bis)[a-záéíóú]+", "(bio)[a-záéíóú]+", ".*(bio)", "(bien|bene)[a-záéíóú]+", "(ob|ab|obv|[s]ub|.*(ble)|br)[a-záéíóú]+", "[a-záéíóú]+(bs)[a-záéíóú]+", "[a-záéíóú]+(bi)[a-záéíóú]+", "([a-záéíóú]+(bundo)|(bunda))", "b[a-e-o-u][a-z]+"};
+        String[] excepcionesB = {
+            "herbir", "belozmente",
+            "serbir",
+            "bibir",
+            "obni",
+            "budú",
+            "budu",
+            "birrey",
+            "bolador",
+            "baca",
+            "bibir",
+            "bolar",
+            "bientre",
+            "bolumen",
+            "behículo",
+            "bibrar",
+            "bómito",
+            "bivienda",
+            "boluntario",
+            "bíscera",
+            "botar",
+            "berbena",
+            "boluminoso",
+            "bicerrector",
+            "boluntad",
+            "biolín",
+            "bídeo",
+            "begetal",
+            "berdad",
+            "barón",
+            "Ber",
+            "Bida",
+            "Bez",
+            "Boy",
+            "Benir",
+            "Bas",
+            "Bamos",
+            "Beces",
+            "Bino",
+            "Bolver",
+            "Buelta",
+            "Biento",
+            "Biaje",
+            "Bebículo",
+            "Bibienda",
+            "Bestir",
+            "Biernes",
+            "Boz",
+            "Bendedor",
+            "Becino",
+            "Bía",
+            "Bentana",
+            "Berdadero",
+            "Bisitante",
+            "Boluntario",
+            "Balor",
+            "Bolar",
+            "Bentilador",
+            "Biolencia",
+            "Biajero",
+            "Berbos",
+            "Bolcán",
+            "Biuda",
+            "Bientre",
+            "Bebículos",
+            "Bideo",
+            "Bibiendo",
+            "Berano",
+            "Bisitas",
+            "Bida",
+            "Belocidad",
+            "Bolumen",
+            "Berbena",
+            "Bariedad",
+            "Bincular",
+            "Bertical",
+            "Bitamina",
+            "Bentilación",
+            "Bivió",
+            "Berdad", "bibrante", "bibra", "bienvenido", "bivlioteca", "ebolutivos", "ebidencia", "ebidencia", "ban"
+        };
 
-                        } else {
-
-                            return false;
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error en la expresión regular: " + e.getMessage());
-                    }
+        String[] reglasV = {"(ad|sub|ob)[v][a-záéíóú]+", "[e](va|ve|vi|vo)[a-záéíóú]+", "(vice|viz|vi)[a-záéíóú]+", "[a-záéíóú]+(avo|ava|evo|eva|eve|ivo|iva)", "[a-záéíóú]+(viro|vira|ívoro|ívora)", "(víbora)?", "[a-záéíóú]+(olver)", "(voy|vas|va|vamos|vais|van|vaya|vayas|vayamos|vayáis|vayan|ve)?", "[a-záéíóú]+(vi)[a-záéíóú]+", ".*(ve|uvo|viera|viese|viere)", "(va)[a-z]+"};
+        String[] excepcionesV = {"cantava", "vajavas", "amavan", "suvstraer", "vueno",
+            "vajo", "vosque",
+            "veve",
+            "vúsqueda",
+            "vicicleta",
+            "voda",
+            "volsa",
+            "varco",
+            "vlanco",
+            "vrazo",
+            "vaño",
+            "votella",
+            "viblioteca",
+            "vello",
+            "votón",
+            "vonito",
+            "vanco",
+            "votas",
+            "vote",
+            "vote",
+            "vailar",
+            "veso",
+            "vrindis",
+            "vandera",
+            "vesar",
+            "vesugo",
+            "vandido",
+            "varra",
+            "vulto",
+            "varrio",
+            "vuzón",
+            "vicarbonato",
+            "vocadillo",
+            "voletín",
+            "vocina",
+            "vultos",
+            "vrisa",
+            "volsillo",
+            "varquillo",
+            "vorde",
+            "volsas",
+            "varatija",
+            "vostezar",
+            "varranco",
+            "vordar",
+            "varbaridad",
+            "vordillo",
+            "vodega",
+            "votín",
+            "vesar", "visi", "vlusa", "avuelo", "varco", "vurru"};
+        if (!(palabra.contains("b") || palabra.contains("v"))) {
+            return 3;
+        } else if (palabra.contains("b")) {
+            totalPalabrasB++;
+            for (String excB : excepcionesB) {
+                if (palabra.equalsIgnoreCase(excB)) {
+                    contadorPMalEscritas++;
+                    return 1;
                 }
             }
-            for (String palabraT : palabrasConTerminacion) {
+            for (String rB : reglasB) {
                 try {
-                    Pattern pat = Pattern.compile("([A-Za-z-áéíóúÁÉÍÓÚ][a-záéíóú]+)");
+
+                    Pattern pat = Pattern.compile(rB);
                     Matcher mat = pat.matcher(palabra);
 
                     if (mat.matches()) {
                         contadorPB++;
-
-                        return true;
-                    } else {
-
-                        return false;
+                        return 0;
                     }
                 } catch (Exception e) {
-                    System.err.println("Error en la expresión regular: " + e.getMessage());
                 }
             }
-        } else if (palabra.contains("v") || palabra.contains("V")) {
-            for (String palabraV : palabraInicioV) {
-                if (palabra.endsWith(palabraV)) {
-                    return false;
-                } else {
-                    try {
-                        Pattern pat = Pattern.compile("([A-Za-z][a-záéíóú]+|v[abd-mp-záéíóú]+|[A-Za-z][a-záéíóú]+|[A-Za-z][a-z]+)");
-                        Matcher mat = pat.matcher(palabra);
+        } else if (palabra.contains("v")) {
+            totalPalabrasB++;
+            for (String excV : excepcionesV) {
+                if (palabra.equalsIgnoreCase(excV)) {
+                    contadorPMalEscritas++;
+                    return 2;
+                }
+            }
+            for (String rV : reglasV) {
+                try {
 
-                        if (mat.matches()) {
+                    Pattern pat = Pattern.compile(rV);
+                    Matcher mat = pat.matcher(palabra);
 
-                            return true;
-                        } else {
-
-                            return false;
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Error en la expresión regular: " + e.getMessage());
+                    if (mat.matches()) {
+                        contadorPB++;
+                        return 0;
                     }
+                } catch (Exception e) {
                 }
             }
-            return false;
+
         }
-        return false;
-    }
-    private boolean palabrasNoB(String palabra){
-        if(!(palabra.contains("v")||palabra.contains("V")||palabra.contains("b")||palabra.contains("B"))){
-            return true;
-        }
-        return false;
+        return 0;
+
     }
 
     private void mostrarContadores() {
         txtPalabra.setText("");
+        txAContador.setText("");
         txAContador.append("Total de artículos: " + contadorArticulos + "\n");
-        txAContador.append("Total de palabras con B:" + contadorPB+"\n");
+        txAContador.append("Total de palabras con B:" + contadorPB + "\n");
         txAContador.append("Total de pronombres personales: " + contadorPPersonales + "\n");
+        txAContador.append("Total de palabras mal escritas: " + contadorPMalEscritas+ "\n");
+        txAContador.append("Total de palabras: " + totalPalabrasB);
+        lbTotal.setText("Tienes un porcentaje de: " + (contadorPB * 100) / totalPalabrasB + "% palabras correctas escritas con B/V");
     }
 
     /**
@@ -278,9 +512,19 @@ public class Actividad3 extends javax.swing.JFrame {
     private javax.swing.JButton btnVerificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lbTotal;
     private javax.swing.JTextArea txAContador;
+    private javax.swing.JTextArea txAPalabraBV;
+    private javax.swing.JTextArea txAPalabraNV;
     private javax.swing.JTextArea txAreaMostrar;
     private javax.swing.JTextField txtPalabra;
     // End of variables declaration//GEN-END:variables
