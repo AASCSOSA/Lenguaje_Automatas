@@ -4,8 +4,21 @@
  */
 package Unidad4;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,21 +34,6 @@ public class main extends javax.swing.JFrame {
 
     public main() {
         initComponents();
-        cargarTabla();
-    }
-
-    private void cargarTabla() {
-        tblmodel.addColumn("Identificadores");
-        tblmodel.addColumn("Entero");
-        tblmodel.addColumn("Entero largo");
-        tblmodel.addColumn("Doble");
-        tblmodel.addColumn("Flotante");
-        tblmodel.addColumn("Verdadero");
-        tblmodel.addColumn("Falso");
-        tblmodel.addColumn("Caracter");
-        tblmodel.addColumn("Cadena");
-        tblMostrar.setModel(tblmodel);
-
     }
 
     /**
@@ -47,92 +45,87 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtTexto = new javax.swing.JTextField();
-        btnVerificar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblMostrar = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtxtaPrueba = new javax.swing.JTextArea();
+        jLabel1 = new JLabel();
+        txtTexto = new JTextField();
+        btnVerificar = new JButton();
+        jScrollPane2 = new JScrollPane();
+        jtxtaPrueba = new JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Ingresar texto:");
 
+        txtTexto.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
+
+        btnVerificar.setFont(new Font("Segoe UI", 1, 12)); // NOI18N
         btnVerificar.setText("Verificar");
-        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnVerificar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 btnVerificarActionPerformed(evt);
             }
         });
 
-        tblMostrar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(tblMostrar);
-
+        jtxtaPrueba.setEditable(false);
         jtxtaPrueba.setColumns(20);
+        jtxtaPrueba.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         jtxtaPrueba.setRows(5);
         jScrollPane2.setViewportView(jtxtaPrueba);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnVerificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnVerificar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTexto, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTexto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnVerificar)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+    private void btnVerificarActionPerformed(ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         CargarMetodos();
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     private void CargarMetodos() {
+
         String[] palabrasRS = palabrasReservadas();
         ArrayList<String> palabras = separarCadenas();
+
         ArrayList<String> obtenerComparacion = compararPalabrasReservadas(palabrasRS, palabras);
 
+        ArrayList<String> obtenerPalabraAnalisis = obtenerPalabrasAnalisis(palabrasRS, palabras);
+        
+        jtxtaPrueba.setText("");
+        txtTexto.setText("");
         for (String comparacion : obtenerComparacion) {
             jtxtaPrueba.append(comparacion + "\n");
         }
+        for (String analisis : obtenerPalabraAnalisis) {
+            jtxtaPrueba.append(analisis + "\n");
+        }
+
     }
 
     private String[] palabrasReservadas() {
@@ -147,21 +140,26 @@ public class main extends javax.swing.JFrame {
     }
 
     private ArrayList<String> separarCadenas() {
-        String[] palabrasSeparadas = new String[0];
-        ArrayList<String> palabraSeparadas = new ArrayList<>();
+        String[] palabrasSeparadasArray;
+        ArrayList<String> palabrasSeparadasList = new ArrayList<>();
         String cadenaSeparada = txtTexto.getText();
+
         if (cadenaSeparada.isEmpty()) {
             return null;
         } else {
-            String delimitadores = "(?<=\\W)|(?=\\W)"; //  Esto utiliza una expresión regular para dividir la cadena en lugares donde hay un límite entre caracteres de palabra
-            palabrasSeparadas = cadenaSeparada.split(delimitadores);
-            //Se recorre el array para tomar los datos que no sean vacio y si es así se guardan en un arraylist
-            for (String palabrasSeparada : palabrasSeparadas) {
-                if (!palabrasSeparada.isEmpty() && !palabrasSeparada.trim().isEmpty()) {
-                    palabraSeparadas.add(palabrasSeparada);
+            // Expresión regular para separar palabras, operadores, delimitadores y comentarios en Java
+            //String delimitadores = "(\\s+|([-+*/(),;])|(\\==)|(\\=))";
+            //String delimitadores = "(?<=(\\==)|=)|(?=(\\==)|=)|(?<=\\s)|(?=\\s)|(?<=[-+*/(),;])|(?=[-+*/(),;])";
+            
+            String delimitadores = "(?<=\\s)|(?=\\s)|(?<=[-+*/(),;=])|(?=[-+*/(),;=])";
+            palabrasSeparadasArray = cadenaSeparada.split(delimitadores);
+            // Se recorre el array para tomar los datos que no sean vacíos y se guardan en un ArrayList
+            for (String palabraSeparada : palabrasSeparadasArray) {
+                if (!palabraSeparada.isEmpty() && !palabraSeparada.trim().isEmpty()) {
+                    palabrasSeparadasList.add(palabraSeparada);
                 }
             }
-            return palabraSeparadas;
+            return palabrasSeparadasList;
         }
     }
 
@@ -169,6 +167,7 @@ public class main extends javax.swing.JFrame {
         ArrayList<String> comparacion = new ArrayList<>();
         String[] palabrasRes = palabrasRS;
         ArrayList<String> palabrasS = palabras;
+
         int contador;
         //Recorre los array, se realiza una comparación y se reinicia el contador para que pueda este volver a entrar a la instrucción
         for (String palabrasSeparadas : palabrasS) {
@@ -188,11 +187,80 @@ public class main extends javax.swing.JFrame {
                         comparacion.add(contador + " Delimitador " + palabrasSeparadas);
                     } else if (contador >= 92 && contador <= 94) {
                         comparacion.add(contador + " Comentarios " + palabrasSeparadas);
-                    } 
+                    }
                 }
             }
         }
         return comparacion;
+    }
+
+    private ArrayList<String> obtenerPalabrasAnalisis(String[] palabrasRS, ArrayList<String> palabras) {
+        ArrayList<String> palabrasRes = new ArrayList<>(Arrays.asList(palabrasRS));
+        ArrayList<String> palabrasS = palabras;
+
+        ArrayList<String> analizar = new ArrayList<>();
+        ArrayList<String> palabrasAnalizadas = new ArrayList<>();
+        for (String palabraSeparada : palabrasS) {
+            if (!palabrasRes.contains(palabraSeparada)) {
+                analizar.add(palabraSeparada);
+            }
+        }
+        for (String analis : analizar) {
+            try {
+                Pattern patIdentificador = Pattern.compile("[a-z-A-Z][a-z-A-Z-0-9_]+|^(false|true)");
+                //Números reales
+                Pattern patLiteralNEntera = Pattern.compile("[0-9]+");
+                Pattern patLiteralNEnteroLargo = Pattern.compile("[0-9]+L");
+
+                //Números reales
+                Pattern patLiteralDouble = Pattern.compile("[0-9]+[.][0-9]+d?");
+                Pattern patLiteralFlotante = Pattern.compile("[0-9]+[.][0-9]+f");
+
+                //Valores booleanos
+                Pattern patVerdadero = Pattern.compile("true");
+                Pattern patFalso = Pattern.compile("false");
+
+                //Carcacteres
+                Pattern patCaracter = Pattern.compile("\'[a-z-A-Z]\'");
+
+                //Cadenas de caracteres
+                Pattern patCadena = Pattern.compile("(\"([a-z-A-Z]+\\s[a-z-A-Z]+)*\")?||(\"[a-z-A-Z]+\")");
+
+                Matcher mat = patIdentificador.matcher(analis);
+                Matcher mat1 = patLiteralNEntera.matcher(analis);
+                Matcher mat2 = patLiteralNEnteroLargo.matcher(analis);
+                Matcher mat3 = patLiteralDouble.matcher(analis);
+                Matcher mat4 = patLiteralFlotante.matcher(analis);
+                Matcher mat5 = patVerdadero.matcher(analis);
+                Matcher mat6 = patFalso.matcher(analis);
+                Matcher mat7 = patCaracter.matcher(analis);
+                Matcher mat8 = patCadena.matcher(analis);
+
+                if (mat.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como identificador " + analis);
+                } else if (mat1.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como Literal entera " + analis);
+                } else if (mat2.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como Literal larga " + analis);
+                } else if (mat3.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como Literal double " + analis);
+                } else if (mat4.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como Literal flotante " + analis);
+                } else if (mat5.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como valor booleano verdadero " + analis);
+                } else if (mat6.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como valor booleano falso " + analis);
+                } else if (mat7.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como caracter " + analis);
+                } else if (mat8.matches()) {
+                    palabrasAnalizadas.add("Cadena válida como cadena " + analis);
+                } else {
+                    palabrasAnalizadas.add("Cadena no válida " + analis);
+                }
+            } catch (Exception e) {
+            }
+        }
+        return palabrasAnalizadas;
     }
 
     /**
@@ -231,12 +299,10 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVerificar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jtxtaPrueba;
-    private javax.swing.JTable tblMostrar;
-    private javax.swing.JTextField txtTexto;
+    private JButton btnVerificar;
+    private JLabel jLabel1;
+    private JScrollPane jScrollPane2;
+    private JTextArea jtxtaPrueba;
+    private JTextField txtTexto;
     // End of variables declaration//GEN-END:variables
 }
