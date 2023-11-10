@@ -4,6 +4,8 @@
  */
 package Unidad4;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -120,26 +122,77 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-//        String[] mandar = separarCadenas();
-//        for (String string : mandar) {
-//            jtxtaPrueba.append(string + "\n");
-//        }
-separarCadenas();
+        CargarMetodos();
     }//GEN-LAST:event_btnVerificarActionPerformed
 
-    private String[] separarCadenas() {
+    private void CargarMetodos() {
+        String[] palabrasRS = palabrasReservadas();
+        ArrayList<String> palabras = separarCadenas();
+        ArrayList<String> obtenerComparacion = compararPalabrasReservadas(palabrasRS, palabras);
+
+        for (String comparacion : obtenerComparacion) {
+            jtxtaPrueba.append(comparacion + "\n");
+        }
+    }
+
+    private String[] palabrasReservadas() {
+        String palabrasReservadas[] = {"abstract", "boolean", "break", "byte", "byvalue", "case", "cast", "catch", "char", "class", "const",
+            "continue", "default", "do", "double", "else", "extends", "final", "finally", "float", "for", "future", "generic", "goto", "if", "implements",
+            "import", "inner", "instanceof", "int", "interface", "long", "native", "new", "null", "operator", "outer", "package", "private", "protected",
+            "public", "rest", "return", "short", "static", "super", "switch", "synchronized", "this", "threadsafe", "throw", "transient", "try", "var",
+            "void", "while", "id", "int", "long", "double", "float", "boolean", "char", "cadenas", "++", "--", "!", "*", "/", "%", "+", "-", "<",
+            ">", "<=", ">=", "==", "!=", "&&", "||", "?", "=", "(", ")", "{", "}", "[", "]", ";", ",", ".", "//", "/*", "/**"
+        };
+        return palabrasReservadas;
+    }
+
+    private ArrayList<String> separarCadenas() {
         String[] palabrasSeparadas = new String[0];
+        ArrayList<String> palabraSeparadas = new ArrayList<>();
         String cadenaSeparada = txtTexto.getText();
         if (cadenaSeparada.isEmpty()) {
-            return palabrasSeparadas;
+            return null;
         } else {
-//            String delimitadores = "[\\s.,;\\-?\\*\\()=\\{}+\"]"; // Define los delimitadores como espacios, comas, puntos y guiones
-//            palabrasSeparadas = cadenaSeparada.split(delimitadores);
-            for (int i = 0; i <=cadenaSeparada.length(); i++) {
-                jtxtaPrueba.append(cadenaSeparada.));
+            String delimitadores = "(?<=\\W)|(?=\\W)"; //  Esto utiliza una expresión regular para dividir la cadena en lugares donde hay un límite entre caracteres de palabra
+            palabrasSeparadas = cadenaSeparada.split(delimitadores);
+            //Se recorre el array para tomar los datos que no sean vacio y si es así se guardan en un arraylist
+            for (String palabrasSeparada : palabrasSeparadas) {
+                if (!palabrasSeparada.isEmpty() && !palabrasSeparada.trim().isEmpty()) {
+                    palabraSeparadas.add(palabrasSeparada);
+                }
             }
-            return palabrasSeparadas;
+            return palabraSeparadas;
         }
+    }
+
+    private ArrayList<String> compararPalabrasReservadas(String[] palabrasRS, ArrayList<String> palabras) {
+        ArrayList<String> comparacion = new ArrayList<>();
+        String[] palabrasRes = palabrasRS;
+        ArrayList<String> palabrasS = palabras;
+        int contador;
+        //Recorre los array, se realiza una comparación y se reinicia el contador para que pueda este volver a entrar a la instrucción
+        for (String palabrasSeparadas : palabrasS) {
+            contador = 0;
+            for (String palabrasReservas : palabrasRes) {
+                contador++;
+                if (palabrasReservas.equals(palabrasSeparadas)) {
+                    if (contador >= 0 && contador <= 56) {
+                        comparacion.add(contador + " Palabra reservada " + palabrasSeparadas);
+                    } else if (contador == 57) {
+                        comparacion.add(contador + " Identificador " + palabrasSeparadas);
+                    } else if (contador >= 58 && contador <= 64) {
+                        comparacion.add(contador + " Literales " + palabrasSeparadas);
+                    } else if (contador >= 65 && contador <= 82) {
+                        comparacion.add(contador + " Operadores " + palabrasSeparadas);
+                    } else if (contador >= 83 && contador <= 91) {
+                        comparacion.add(contador + " Delimitador " + palabrasSeparadas);
+                    } else if (contador >= 92 && contador <= 94) {
+                        comparacion.add(contador + " Comentarios " + palabrasSeparadas);
+                    } 
+                }
+            }
+        }
+        return comparacion;
     }
 
     /**
