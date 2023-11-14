@@ -113,10 +113,12 @@ public class main extends javax.swing.JFrame {
         String[] palabrasRS = palabrasReservadas();
         ArrayList<String> palabras = separarCadenas();
 
-        ArrayList<String> obtenerComparacion = compararPalabrasReservadas(palabrasRS, palabras);
-
-        ArrayList<String> obtenerPalabraAnalisis = obtenerPalabrasAnalisis(palabrasRS, palabras);
+        ArrayList<String> prueba = separadorDeCadenasEspeciales();
         
+        ArrayList<String> obtenerComparacion = compararPalabrasReservadas(palabrasRS, prueba);
+
+        ArrayList<String> obtenerPalabraAnalisis = obtenerPalabrasAnalisis(palabrasRS, prueba);
+
         jtxtaPrueba.setText("");
         txtTexto.setText("");
         for (String comparacion : obtenerComparacion) {
@@ -125,6 +127,9 @@ public class main extends javax.swing.JFrame {
         for (String analisis : obtenerPalabraAnalisis) {
             jtxtaPrueba.append(analisis + "\n");
         }
+//        for (String string : prueba) {
+//            jtxtaPrueba.append(string + "\n");
+//        }
 
     }
 
@@ -149,9 +154,31 @@ public class main extends javax.swing.JFrame {
         } else {
             // Expresión regular para separar palabras, operadores, delimitadores y comentarios en Java
             //String delimitadores = "(\\s+|([-+*/(),;])|(\\==)|(\\=))";
-            //String delimitadores = "(?<=(\\==)|=)|(?=(\\==)|=)|(?<=\\s)|(?=\\s)|(?<=[-+*/(),;])|(?=[-+*/(),;])";
-            
-            String delimitadores = "(?<=\\s)|(?=\\s)|(?<=[-+*/(),;=])|(?=[-+*/(),;=])";
+            String delimitadores = "(?<=(\\==))|(?=(\\==))|(?<=\\s)|(?=\\s)|(?<=[-+*/(),;])|(?=[-+*/(),;])";
+
+            //String delimitadores = "(?<=\\s)|(?=\\s)|(?<=[-+*/(),;=])|(?=[-+*/(),;=])";
+            palabrasSeparadasArray = cadenaSeparada.split(delimitadores);
+            // Se recorre el array para tomar los datos que no sean vacíos y se guardan en un ArrayList
+            for (String palabraSeparada : palabrasSeparadasArray) {
+                if (!palabraSeparada.isEmpty() && !palabraSeparada.trim().isEmpty()) {
+                    palabrasSeparadasList.add(palabraSeparada);
+                }
+            }
+            return palabrasSeparadasList;
+        }
+    }
+
+    private ArrayList<String> separadorDeCadenasEspeciales() {
+        String[] palabrasSeparadasArray;
+        ArrayList<String> palabrasSeparadasList = new ArrayList<>();
+        String cadenaSeparada = txtTexto.getText();
+
+        if (cadenaSeparada.isEmpty()) {
+            return null;
+        } else {
+            // Expresión regular para separar palabras, operadores, delimitadores y comentarios en Java
+            String delimitadores = "(?<=(//))|(?=(//))|(?<=(\\==))|(?=(\\==))|(?<=\\s)|(?=\\s)|(?<=\\++)|(?=\\++)";
+
             palabrasSeparadasArray = cadenaSeparada.split(delimitadores);
             // Se recorre el array para tomar los datos que no sean vacíos y se guardan en un ArrayList
             for (String palabraSeparada : palabrasSeparadasArray) {
